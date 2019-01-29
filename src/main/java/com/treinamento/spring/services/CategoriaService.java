@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.treinamento.spring.domain.Categoria;
+import com.treinamento.spring.domain.Cliente;
 import com.treinamento.spring.dto.CategoriaDTO;
 import com.treinamento.spring.repositories.CategoriaRepository;
 import com.treinamento.spring.services.exceptions.DataIntegrityException;
@@ -34,7 +35,8 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria obj) {
-		find(obj.getId()); // Para aproveitar o tratamento de excecao do metodo find
+		Categoria newObj = find(obj.getId()); // Para aproveitar o tratamento de excecao do metodo find
+		updateData(newObj, obj);
 		return repo.save(obj);
 	}
 	
@@ -58,6 +60,10 @@ public class CategoriaService {
 	
 	public Categoria fromDTO(CategoriaDTO objDTO) {
 		return new Categoria(objDTO.getId(),  objDTO.getNome());
+	}
+	
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
 	}
 	
 }

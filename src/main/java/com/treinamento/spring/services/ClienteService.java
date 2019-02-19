@@ -78,7 +78,6 @@ public class ClienteService {
 	}
 	
 	public Cliente fromDTO(ClienteNewDTO objDTO) {
-		System.out.println( "TipoCliente:" + objDTO.getTipo());
 		Cliente cli = new Cliente(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getCpfCnpj(), TipoCliente.toEnum(objDTO.getTipo()));
 		Optional<Cidade> cid = cidadeRepository.findById(objDTO.getCidadeId());
 		Endereco end = new Endereco(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getComplemento(), objDTO.getBairro(), objDTO.getCep(), cli, cid.get());
